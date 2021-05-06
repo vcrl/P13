@@ -57,6 +57,7 @@ class RDV(models.Model):
     service = models.ForeignKey(Service, on_delete=models.SET_NULL, default="", null=True)
     date = models.DateTimeField()
     completed = models.DateTimeField(null=True)
+    comment = models.TextField(max_length=255, default="", null=True)
 
     def __str__(self):
         return self.client.nom

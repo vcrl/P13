@@ -46,7 +46,7 @@
           <li class="nav-header">RENDEZ-VOUS</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-clock"></i>
+              <i class="nav-icon fas fa-phone"></i>
               <p>
                 Gestion des RDV
                 <i class="fas fa-angle-left right"></i>
@@ -54,14 +54,14 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{% url 'add_client' %}" class="nav-link">
+                <a href="{% url 'add_rdv' %}" class="nav-link">
                   <i class="nav-icon far fa-plus-square"></i>
                   <p>Nouveau rendez-vous</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{% url 'calendar' %}" class="nav-link">
-                  <i class="nav-icon fas fa-book"></i>
+                  <i class="nav-icon fas fa-clock"></i>
                   <p>Calendrier</p>
                 </a>
               </li>
@@ -140,7 +140,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{% url 'services' %}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-building nav-icon"></i>
                   <p>Services</p>
                 </a>
               </li>

@@ -2,7 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.forms import ModelChoiceField
 from django.contrib.auth.models import User
-from .models import Client, Chien, Race
+from .models import Client, Chien, Race, Service, RDV
+import datetime
 
 class NewClient(forms.ModelForm):
     prenom = forms.CharField(max_length=254)
@@ -34,3 +35,12 @@ class NewRace(forms.ModelForm):
     class Meta:
         fields = ('race',)
         model = Race
+
+class NewRDV(forms.ModelForm):
+    client = forms.ModelChoiceField(queryset=Client.objects.all(), initial=0)
+    service = forms.ModelMultipleChoiceField(queryset=Service.objects.all(), initial=0, widget=forms.CheckboxSelectMultiple)
+    date = forms.DateField(initial=datetime.date.today)
+    
+    class Meta:
+        fields = ('client', 'service', 'date')
+        model = RDV
