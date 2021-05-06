@@ -46,7 +46,7 @@
           <li class="nav-header">RENDEZ-VOUS</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="nav-icon fas fa-clock"></i>
               <p>
                 Gestion des RDV
                 <i class="fas fa-angle-left right"></i>
@@ -73,7 +73,7 @@
           <!-- GESTION DES CLIENTS -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="nav-icon fas fa-user"></i>
               <p>
                 Gestion des clients
                 <i class="fas fa-angle-left right"></i>
@@ -98,7 +98,7 @@
           <!-- GESTION DES CHIENS -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+              <i class="nav-icon fas fa-user"></i>
               <p>
                 Gestion des chiens
                 <i class="right fas fa-angle-left"></i>
@@ -126,12 +126,33 @@
             </ul>
           </li>
 
+          <li class="nav-header">SERVICES</li>
+
+          <!-- GESTION DES SERVICES -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Gestion des services
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'services' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Services</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <li class="nav-header">REVENUS</li>
 
           <!-- GESTION DES COMPTES -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
+              <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Gestion des revenus
                 <i class="fas fa-angle-left right"></i>

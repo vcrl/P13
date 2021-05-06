@@ -1,7 +1,9 @@
 from django.contrib import admin
-from .models import Client, Chien, Race
+from .models import Client, Chien, Race, Service, RDV
 
 # Register your models here.
 admin.site.register(Chien)
 admin.site.register(Client)
 admin.site.register(Race)
+admin.site.register(Service)
+admin.site.register(RDV)

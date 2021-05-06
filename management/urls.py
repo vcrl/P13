@@ -12,4 +12,5 @@ urlpatterns = [
     path('add_race/', views.add_race, name="add_race"),
     path('save_race/', views.save_race, name="save_race"),
     path('calendar/', views.calendar, name="calendar"),
+    path('services/', views.services, name="services")
 ]

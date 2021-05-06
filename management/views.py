@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Client, Chien, Race
+from .models import Client, Chien, Race, Service, RDV
 from .forms import NewClient, NewDog, NewRace
 
 # Clients.
@@ -50,3 +50,8 @@ def save_race(request):
 
 def calendar(request):
     return render(request, "management/calendar.html")
+
+# Services.
+def services(request):
+    services = Service.objects.all()
+    return render(request, "management/services.html", {'services':services})
