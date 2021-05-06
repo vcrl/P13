@@ -1,0 +1,209 @@
+{% load static %}
+<head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <title>Toilettage | Dashboard</title>
+   
+     <!-- Google Font: Source Sans Pro -->
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+     <!-- Font Awesome -->
+     <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+     <!-- Ionicons -->
+     <link rel="stylesheet" href="{% static 'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' %}">
+     <!-- Tempusdominus Bootstrap 4 -->
+     <link rel="stylesheet" href="{% static 'plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
+     <!-- iCheck -->
+     <link rel="stylesheet" href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css'}">
+     <!-- JQVMap -->
+     <link rel="stylesheet" href="{% static 'plugins/jqvmap/jqvmap.min.css' %}">
+     <!-- Theme style -->
+     <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+     <!-- overlayScrollbars -->
+     <link rel="stylesheet" href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+     <!-- Daterange picker -->
+     <link rel="stylesheet" href="{% static 'plugins/daterangepicker/daterangepicker.css' %}">
+     <!-- summernote -->
+     <link rel="stylesheet" href="{% static 'plugins/summernote/summernote-bs4.min.css' %}">
+   </head>
+
+   <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{% url 'frontpage' %}" class="brand-link">
+      <img src="{% static 'dist/img/AdminLTELogo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Toilettage</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+          <li class="nav-header">RENDEZ-VOUS</li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Gestion des RDV
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'add_client' %}" class="nav-link">
+                  <i class="nav-icon far fa-plus-square"></i>
+                  <p>Nouveau rendez-vous</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'calendar' %}" class="nav-link">
+                  <i class="nav-icon fas fa-book"></i>
+                  <p>Calendrier</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-header">CLIENTELE</li>
+
+          <!-- GESTION DES CLIENTS -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Gestion des clients
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'add_client' %}" class="nav-link">
+                  <i class="nav-icon far fa-plus-square"></i>
+                  <p>Nouveau client</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'clients' %}" class="nav-link">
+                  <i class="nav-icon fas fa-book"></i>
+                  <p>Liste</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- GESTION DES CHIENS -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Gestion des chiens
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'add_dog' %}" class="nav-link">
+                  <i class="nav-icon far fa-plus-square"></i>
+                  <p>Nouveau chien</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'add_race' %}" class="nav-link">
+                  <i class="nav-icon far fa-plus-square"></i>
+                  <p>Nouvelle race</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'dogs' %}" class="nav-link">
+                  <i class="nav-icon fas fa-book"></i>
+                  <p>Liste</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-header">REVENUS</li>
+
+          <!-- GESTION DES COMPTES -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Gestion des revenus
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/tables/simple.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Simple Tables</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/tables/data.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>DataTables</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/tables/jsgrid.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>jsGrid</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+     {% block content %}
+
+     {% endblock %}
+     <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+     <!-- jQuery UI 1.11.4 -->
+     <script src="{% static 'plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+     <script>
+       $.widget.bridge('uibutton', $.ui.button)
+     </script>
+     <!-- Bootstrap 4 -->
+     <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+     <!-- ChartJS -->
+     <script src="{% static 'plugins/chart.js/Chart.min.js' %}"></script>
+     <!-- Sparkline -->
+     <script src="{% static 'plugins/sparklines/sparkline.js' %}"></script>
+     <!-- JQVMap -->
+     <script src="{% static 'plugins/jqvmap/jquery.vmap.min.js' %}"></script>
+     <script src="{% static 'plugins/jqvmap/maps/jquery.vmap.usa.js' %}"></script>
+     <!-- jQuery Knob Chart -->
+     <script src="{% static 'plugins/jquery-knob/jquery.knob.min.js' %}"></script>
+     <!-- daterangepicker -->
+     <script src="{% static 'plugins/moment/moment.min.js' %}"></script>
+     <script src="{% static 'plugins/daterangepicker/daterangepicker.js' %}"></script>
+     <!-- Tempusdominus Bootstrap 4 -->
+     <script src="{% static 'plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+     <!-- Summernote -->
+     <script src="{% static 'plugins/summernote/summernote-bs4.min.js' %}"></script>
+     <!-- overlayScrollbars -->
+     <script src="{% static 'plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+     <!-- AdminLTE App -->
+     <script src="{% static 'dist/js/adminlte.js' %}"></script>
+     <!-- AdminLTE for demo purposes -->
+     <script src="{% static 'dist/js/demo.js' %}"></script>
+     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+     <script src="{% static 'dist/js/pages/dashboard.js' %}"></script>
+
+     <!-- Bootstrap 4 -->
+     <!-- AdminLTE App -->
+     <!-- AdminLTE for demo purposes -->
+     <!-- Bootstrap 4 -->
+     <!-- AdminLTE App -->
+     <!-- AdminLTE for demo purposes -->

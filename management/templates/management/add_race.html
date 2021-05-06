@@ -1,0 +1,76 @@
+{% extends "frontpage/base.html" %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+{% block content %}
+<body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Nouvelle Race</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <form method="POST" action="{% url 'save_race' %}">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Informations</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="inputName">Race</label>
+                  <br>
+                  {{ form.race|add_class:"form-control" }}
+
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      
+      <div class="row">
+        <div class="col-12">
+          <a href="#" class="btn btn-secondary">Annuler</a>
+          <input type="submit" value="Enregistrer" class="btn btn-success float-right">
+        </div>
+      </div>
+    </form>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+</body>
+{% endblock %}
+</html>
