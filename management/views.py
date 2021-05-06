@@ -8,7 +8,7 @@ def add_client(request):
     return render(request, "management/add_client.html", {'form':form})
 
 def clients(request):
-    clients = Client.objects.all()
+    clients = Client.objects.all().order_by('nom')
     chiens = Chien.objects.all()
     return render(request, "management/clients.html", {'clients':clients, 'chiens':chiens})
 
