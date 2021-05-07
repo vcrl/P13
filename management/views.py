@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Client, Chien, Race, Service, RDV
-from .forms import NewClient, NewDog, NewRace, NewRDV
+from .forms import NewClient, NewDog, NewRace, NewRDV, NewService
 
 # Clients.
 def add_client(request):
@@ -55,6 +55,17 @@ def calendar(request):
 def services(request):
     services = Service.objects.all().order_by("service")
     return render(request, "management/services.html", {'services':services})
+
+def add_service(request):
+    form = NewService()
+    return render(request, "management/add_service.html", {'form':form})
+
+def save_service(request):
+    if request.method == "POST":
+        form = NewService(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect("services")
 
 # RDV.
 def add_rdv(request):

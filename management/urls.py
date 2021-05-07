@@ -13,5 +13,7 @@ urlpatterns = [
     path('save_race/', views.save_race, name="save_race"),
     path('calendar/', views.calendar, name="calendar"),
     path('services/', views.services, name="services"),
-    path('add_rdv/', views.add_rdv, name="add_rdv")
+    path('add_rdv/', views.add_rdv, name="add_rdv"),
+    path('add_service/', views.add_service, name="add_service"),
+    path('save_service/', views.save_service, name="save_service"),
 ]
