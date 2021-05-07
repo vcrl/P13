@@ -126,14 +126,14 @@
             </ul>
           </li>
 
-          <li class="nav-header">SERVICES</li>
+          <li class="nav-header">ADMINISTRATION</li>
 
           <!-- GESTION DES SERVICES -->
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Gestion des services
+                Services et employés
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -142,6 +142,14 @@
                 <a href="{% url 'services' %}" class="nav-link">
                   <i class="far fa-building nav-icon"></i>
                   <p>Services</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'services' %}" class="nav-link">
+                  <i class="far fa-user nav-icon"></i>
+                  <p>Employés</p>
                 </a>
               </li>
             </ul>

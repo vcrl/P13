@@ -17,6 +17,7 @@ urlpatterns = [
     path('calendar/', views.calendar, name="calendar"),
     path('services/', views.services, name="services"),
     path('add_rdv/', views.add_rdv, name="add_rdv"),
+    path('save_rdv/', views.save_rdv, name="save_rdv"),
     # Services.
     path('add_service/', views.add_service, name="add_service"),
     path('save_service/', views.save_service, name="save_service"),

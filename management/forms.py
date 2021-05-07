@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.forms import ModelChoiceField
 from django.contrib.auth.models import User
-from .models import Client, Chien, Race, Service, RDV
+from .models import Client, Chien, Race, Service, RDV, Employee
 import datetime
 
 class NewClient(forms.ModelForm):
@@ -10,8 +10,8 @@ class NewClient(forms.ModelForm):
     nom = forms.CharField(max_length=254)
     adresse = forms.CharField(max_length=254)
     num = forms.CharField(max_length=254)
-    toiletteur = forms.CharField(max_length=254)
-    chien = forms.ModelChoiceField(queryset=Chien.objects.all(), initial=0)
+    toiletteur = forms.ModelChoiceField(queryset=Employee.objects.all(), initial=0)
+    chien = forms.ModelMultipleChoiceField(queryset=Chien.objects.all(), initial=0)
     profession = forms.CharField(max_length=254)
     comment = forms.CharField(max_length=254)
 
@@ -38,11 +38,13 @@ class NewRace(forms.ModelForm):
 
 class NewRDV(forms.ModelForm):
     client = forms.ModelChoiceField(queryset=Client.objects.all(), initial=0)
-    service = forms.ModelMultipleChoiceField(queryset=Service.objects.all(), initial=0, widget=forms.CheckboxSelectMultiple)
+    service = forms.ModelMultipleChoiceField(queryset=Service.objects.all(), initial=0)
     date = forms.DateField(initial=datetime.date.today)
+    comment = forms.CharField(max_length=255, widget=forms.Textarea)
+    toiletteur = forms.ModelChoiceField(queryset=Employee.objects.all(), initial=0)
     
     class Meta:
-        fields = ('client', 'service', 'date')
+        fields = ('client', 'service', 'date', 'comment', 'toiletteur')
         model = RDV
 
 class NewService(forms.ModelForm):

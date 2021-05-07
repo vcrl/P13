@@ -43,11 +43,14 @@
                       <ul class="ml-4 mb-0 fa-ul text-muted">
                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Addresse: {{ client.adresse }}</li>
                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Tél. : {{ client.num }}</li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-user"></i></span> Toiletteuse : {{ client.toiletteur }}</li>
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-user"></i></span> Toiletteuse : {{ client.toiletteur.prenom }} {{ client.toiletteur.nom }}</li>
                       </ul>
                     </div>
                     <div class="col-5 text-center">
-                      <p class="text-muted text-sm"><b>Chien: </b> {{ client.chien.nom }} ({{ client.chien.race }}) </p>
+                      <p class="text-muted text-sm"><b>Chien(s) </b></p>
+                      {% for chien in client.chien.all %}
+                       <p class="text-muted text-sm">{{ chien.nom }} ({{ chien.race }}, {{ chien.age }} ans)</p>
+                      {% endfor %}
                       <p class="text-muted text-sm"><b>A propos: </b> {{ client.comment }} </p>
                     </div>
                   </div>

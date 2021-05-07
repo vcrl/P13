@@ -81,3 +81,10 @@ def service_delete(request, service_pk):
 def add_rdv(request):
     form = NewRDV
     return render(request, "management/add_rdv.html", {'form':form})
+
+def save_rdv(request):
+    if request.method == "POST":
+        form = NewRDV(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect("frontpage")
