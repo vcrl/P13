@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Client, Chien, Race, Service, RDV
 from .forms import NewClient, NewDog, NewRace, NewRDV, NewService
 
@@ -65,6 +65,16 @@ def save_service(request):
         form = NewService(request.POST)
         if form.is_valid():
             form.save()
+        return redirect("services")
+
+def service_details(request, service_pk):
+    service = get_object_or_404(Service, pk=service_pk)
+    return render(request, "management/service_detail.html", {"service":service})
+
+def service_delete(request, service_pk):
+    if request.method == "POST":
+        service = get_object_or_404(Service, pk=service_pk)
+        service.delete()
         return redirect("services")
 
 # RDV.
