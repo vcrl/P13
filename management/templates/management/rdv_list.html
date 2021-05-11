@@ -16,7 +16,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Services</h1>
+            <h1>Rendez-Vous</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -29,7 +29,6 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <a type="button" href="{% url 'add_service' %}" class="btn btn-primary"><i class="nav-icon fas fa-plus"></i> Ajouter</a>
               </div>
               
               <!-- /.card-header -->
@@ -37,30 +36,58 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Service</th>
-                    <th>Race</th>
+                    <th>Date</th>
+                    <th>Client</th>
+                    <th>Chien(s)</th>
+                    <th>Service(s)</th>
                     <th>Durée</th>
-                    <th>Prix</th>
+                    <th>Gain HT</th>
+                    <th>Commentaire</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                {% for service in services %}
-                  <tr>
-                    <td>{{ service.service }}</td>
-                    <td>
-                      {{ service.race }}
-                    </td>
-                    <td>{{ service.duree }}</td>
-                    <td>{{ service.prix }}€</td>
-                    <td style="display: flex;">
-                      <form method="POST" action="{% url 'service_delete' service.id %}">
-                        <!--<a type="button" href="{% url 'service_details' service.id %}" class="btn btn-primary"><i class="nav-icon fas fa-edit"></i></a>-->
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger"><i class="nav-icon fas fa-trash"></i></button>
-                      </form>
-                    </td>
-                  </tr>
+                {% for rdv in rdvs %}
+                    {% if not rdv.completed %}
+                      <tr>
+                        <td>{{ rdv.date }}</td>
+                        <td>{{ rdv.client }}</td>
+                        <td>
+                          {% for chien in rdv.client.chien.all %}
+                          - {{ chien }} <br />
+                        {% endfor %}
+                        </td>
+                        <td>
+                          {% for service in rdv.service.all %}
+                            - {{ service }} <br />
+                          {% endfor %}
+                        </td>
+                        <td>
+                          {% for service_duree in rdv.service.all %}
+                            + {{ service_duree.duree }} <br />
+                          {% endfor %}
+                        </td>
+                        <td>
+                          {% for service_prix in rdv.service.all %}
+                            + {{ service_prix.prix }}€ <br />
+                          {% endfor %}
+                        </td>
+                        <td>
+                          {{ rdv.comment }}
+                        </td>
+                        <td style="display: flex;">
+                          <form method="POST" action="{% url 'rdv_complete' rdv.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success"><i class="nav-icon fas fa-credit-card"></i></button>
+                          </form>
+
+                          <form method="POST" action="{% url 'rdv_delete' rdv.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger"><i class="nav-icon fas fa-trash"></i></button>
+                          </form>
+                        </td>
+                      </tr>
+                    {% endif %}
                 {% endfor %}
                   </tfoot>
                 </table>

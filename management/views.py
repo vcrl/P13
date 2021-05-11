@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Client, Chien, Race, Service, RDV
 from .forms import NewClient, NewDog, NewRace, NewRDV, NewService
+from django.utils import timezone
+import datetime
 
 # Clients.
 def add_client(request):
@@ -69,7 +71,7 @@ def save_service(request):
 
 def service_details(request, service_pk):
     service = get_object_or_404(Service, pk=service_pk)
-    return render(request, "management/service_detail.html", {"service":service})
+    return render(request, 'management/service_detail.html', {'service':service})
 
 def service_delete(request, service_pk):
     if request.method == "POST":
@@ -87,4 +89,74 @@ def save_rdv(request):
         form = NewRDV(request.POST)
         if form.is_valid():
             form.save()
-        return redirect("frontpage")
+            return redirect("rdv_list")  
+
+def rdv_details(request, rdv_pk):
+    rdv = get_object_or_404(RDV, pk=rdv_pk)
+    return render(request, "management/rdv_detail.html", {"rdv":rdv})
+
+def rdv_list(request):
+    rdvs = RDV.objects.all().order_by("-date")
+    return render(request, "management/rdv_list.html", {"rdvs":rdvs})
+
+def rdv_complete(request, rdv_pk):
+    rdv = get_object_or_404(RDV, pk=rdv_pk)
+    if request.method == "POST":
+        rdv.completed = timezone.now()
+        rdv.save()
+        return redirect('rdv_list')
+
+def rdv_delete(request, rdv_pk):
+    if request.method == "POST":
+        rdv = get_object_or_404(RDV, pk=rdv_pk)
+        rdv.delete()
+        return redirect("rdv_list")
+
+# Revenus.
+def revenus_mensuel(request):
+    today = datetime.date.today()
+    months = ['zero','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre']
+    current_month = months[today.month]
+
+    rdvs = RDV.objects.all()
+    rdv_list = []
+    gain_total = 0
+    for rdv in rdvs:
+        if rdv.completed:
+            if rdv.completed.month == today.month:
+                rdv_list.append(rdv)
+    
+    for rdv in rdv_list:
+        for prix in rdv.service.all():
+            gain_total += prix.prix
+
+    gain_tva = float(gain_total) * 20 / 100
+
+    gain_net = float(gain_total) - gain_tva
+
+    return render(request, 'management/revenus_mensuel.html', {"month":current_month, "today":today, "rdv_list":rdv_list, 
+    "gain_total":gain_total, "gain_tva":gain_tva, "gain_net":gain_net})
+
+def revenus_annuels(request):
+    today = datetime.date.today()
+    months = ['zero','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre']
+    current_month = months[today.month]
+
+    rdvs = RDV.objects.all()
+    rdv_list = []
+    gain_total = 0
+    for rdv in rdvs:
+        if rdv.completed:
+            if rdv.completed.year == today.year:
+                rdv_list.append(rdv)
+    
+    for rdv in rdv_list:
+        for prix in rdv.service.all():
+            gain_total += prix.prix
+
+    gain_tva = float(gain_total) * 20 / 100
+
+    gain_net = float(gain_total) - gain_tva
+
+    return render(request, 'management/revenus_annuels.html', {"month":current_month, "today":today, "rdv_list":rdv_list, 
+    "gain_total":gain_total, "gain_tva":gain_tva, "gain_net":gain_net})

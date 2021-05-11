@@ -60,9 +60,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{% url 'calendar' %}" class="nav-link">
+                <a href="{% url 'rdv_list' %}" class="nav-link">
                   <i class="nav-icon fas fa-clock"></i>
-                  <p>Calendrier</p>
+                  <p>Rendez-Vous</p>
                 </a>
               </li>
             </ul>
@@ -168,21 +168,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/tables/simple.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Simple Tables</p>
+                <a href="{% url 'revenus_mensuel' %}" class="nav-link">
+                  <i class="far fa-book nav-icon"></i>
+                  <p>Revenus du mois</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>DataTables</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/tables/jsgrid.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>jsGrid</p>
+                <a href="{% url 'revenus_annuels' %}" class="nav-link">
+                  <i class="far fa-book nav-icon"></i>
+                  <p>Revenus de l'année</p>
                 </a>
               </li>
             </ul>

@@ -22,7 +22,7 @@
     <!-- Main content -->
     <section class="content">
 
-      <form method="POST" action="{% url 'save_service' %}">
+      <form method="POST" action="{% url 'service_edit' service.id %}">
         {% csrf_token %}
         <div class="row">
           <div class="col-md-6">
@@ -40,18 +40,18 @@
                 <div class="form-group">
                   <label for="inputName">Service</label>
                   <br>
-                  {{ service.service }}
+                  <input type="text" id="inputName" class="form-control" value="{{ service.service }}">
 
                 </div>
                 <div class="form-group">
                   <label for="inputName">Race concernée</label>
                   <br>
-                  {{ service.race }}
+                  <input type="text" id="inputName" class="form-control" value="{{ service.race }}">
                 </div>
                 <div class="form-group">
                   <label for="inputDescription">Durée du service</label>
                   <br>
-                  {{ service.duree }}
+                  <input type="text" id="inputName" class="form-control custom-select" value="{{ service.duree }}">
                 </div>
               </div>
               <!-- /.card-body -->
@@ -73,7 +73,7 @@
                 <div class="form-group">
                   <label for="inputEstimatedBudget">Prix</label>
                   <br>
-                  {{ service.prix }}
+                  <input type="text" id="inputName" class="form-control" value="{{ service.prix }}">
                 </div>
               </div>
               <!-- /.card-body -->
