@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Client, Chien, Race, Service, RDV
-from .forms import NewClient, NewDog, NewRace, NewRDV, NewService
+from .models import Client, Chien, Race, Service, RDV, Employee
+from .forms import NewClient, NewDog, NewRace, NewRDV, NewService, NewEmployee
 from django.utils import timezone
 import datetime
 from django.core.paginator import Paginator
@@ -110,7 +110,7 @@ def rdv_details(request, rdv_pk):
     return render(request, "management/rdv_detail.html", {"rdv":rdv})
 
 def rdv_list(request):
-    rdvs = RDV.objects.all().order_by("-date")
+    rdvs = RDV.objects.all().order_by("date")
     return render(request, "management/rdv_list.html", {"rdvs":rdvs})
 
 def rdv_complete(request, rdv_pk):
@@ -177,4 +177,28 @@ def revenus_annuels(request):
 
 
 # Employés.
+def add_employee(request):
+    form = NewEmployee()
+    return render(request, "management/add_employee.html", {'form':form})
 
+def employees(request):
+    clients = Client.objects.all().order_by('nom')
+    chiens = Chien.objects.all()
+
+    clients_paginator = Paginator(clients, 6)
+    page_number = request.GET.get("page")
+    page = clients_paginator.get_page(page_number)
+    return render(request, "management/clients.html", {'clients':clients, 'chiens':chiens, 'page':page, 'count':clients_paginator.count})
+
+def save_employee(request):
+    if request.method == "POST":
+        form = NewClient(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect("clients")
+
+def employee_delete(request, client_pk):
+    if request.method == "POST":
+        client = get_object_or_404(Client, pk=client_pk)
+        client.delete()
+        return redirect("clients")

@@ -6,6 +6,9 @@ class Employee(models.Model):
     nom = models.CharField(max_length=155, default="", null=True)
     adresse = models.CharField(max_length=155, default="", null=True)
     num = models.CharField(max_length=255, default="", null=True)
+    rdv_number = models.IntegerField(default=0, null=True)
+    joined = models.DateTimeField()
+    fired = models.DateTimeField()
 
     def __str__(self):
         return self.nom

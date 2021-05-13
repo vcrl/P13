@@ -82,3 +82,16 @@ class NewService(forms.ModelForm):
     class Meta:
         fields = ('service', 'prix', 'race', 'duree')
         model = Service
+
+class NewEmployee(forms.ModelForm):
+    prenom = forms.CharField(max_length=254)
+    nom = forms.CharField(max_length=254)
+    adresse = forms.CharField(max_length=254)
+    num = forms.CharField(max_length=254)
+    rdv_number = forms.IntegerField()
+    joined = forms.DateTimeField()
+    fired = forms.DateTimeField()
+
+    class Meta:
+        fields = ('prenom', "nom", "adresse", "num")
+        model = Employee

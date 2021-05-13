@@ -16,7 +16,6 @@ urlpatterns = [
     path('save_race/', views.save_race, name="save_race"),
     # RDV.
     path('calendar/', views.calendar, name="calendar"),
-    path('services/', views.services, name="services"),
     path('add_rdv/', views.add_rdv, name="add_rdv"),
     path('save_rdv/', views.save_rdv, name="save_rdv"),
     path('rdv/<int:rdv_pk>', views.rdv_details, name="rdv_details"),
@@ -24,6 +23,7 @@ urlpatterns = [
     path('complete_rdv/<int:rdv_pk>', views.rdv_complete, name="rdv_complete"),
     path('rdv_list/<int:rdv_pk>/delete', views.rdv_delete, name="rdv_delete"),
     # Services.
+    path('services/', views.services, name="services"),
     path('add_service/', views.add_service, name="add_service"),
     path('save_service/', views.save_service, name="save_service"),
     path('services/<int:service_pk>', views.service_details, name="service_details"),
@@ -31,4 +31,9 @@ urlpatterns = [
     # Revenus.
     path('revenus/mensuels', views.revenus_mensuel, name="revenus_mensuel"),
     path('revenus/annuels', views.revenus_annuels, name="revenus_annuels"),
+    # Employees.
+    path('add_employee/', views.add_employee, name="add_employee"),
+    path('save_employee/', views.save_employee, name="save_employee"),
+    path('employees/', views.employees, name="employees"),
+    path('clients/<int:client_pk>/delete', views.client_delete, name="client_delete"),
 ]

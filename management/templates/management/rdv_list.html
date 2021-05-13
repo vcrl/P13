@@ -1,4 +1,5 @@
 {% extends "frontpage/base.html" %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 {% block content %}
@@ -50,7 +51,11 @@
                 {% for rdv in rdvs %}
                     {% if not rdv.completed %}
                       <tr>
-                        <td>{{ rdv.date }}</td>
+                        <td>
+                          {% language 'fr' %}
+                            {{ rdv.date }}
+                          {% endlanguage %}
+                        </td>
                         <td>{{ rdv.client }}</td>
                         <td>
                           {% for chien in rdv.client.chien.all %}

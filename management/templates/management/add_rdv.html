@@ -1,5 +1,6 @@
 {% extends "frontpage/base.html" %}
 {% load widget_tweaks %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,7 +72,9 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="inputDescription">Date</label>
-                {{ form.date|add_class:"form-control" }}
+                {% language 'fr' %}
+                  {{ form.date }}
+                {% endlanguage %}
               </div>
             </div>
             <div class="card-body">
