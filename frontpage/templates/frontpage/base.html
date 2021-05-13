@@ -133,7 +133,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Services et employés
+                Services
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -145,11 +145,29 @@
                 </a>
               </li>
             </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Employés
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'services' %}" class="nav-link">
+                  <i class="far fa-plus-square nav-icon"></i>
+                  <p>Nouvel employé</p>
+                </a>
+              </li>
+            </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{% url 'services' %}" class="nav-link">
                   <i class="far fa-user nav-icon"></i>
-                  <p>Employés</p>
+                  <p>Liste</p>
                 </a>
               </li>
             </ul>
@@ -169,13 +187,13 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{% url 'revenus_mensuel' %}" class="nav-link">
-                  <i class="far fa-book nav-icon"></i>
+                  <i class="far fa-credit-card nav-icon"></i>
                   <p>Revenus du mois</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{% url 'revenus_annuels' %}" class="nav-link">
-                  <i class="far fa-book nav-icon"></i>
+                  <i class="far fa-credit-card nav-icon"></i>
                   <p>Revenus de l'année</p>
                 </a>
               </li>

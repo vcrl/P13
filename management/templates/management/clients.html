@@ -28,7 +28,7 @@
           <div class="row">
 
             <!-- LISTING CLIENTS -->
-            {% for client in clients %}
+            {% for client in page.object_list %}
             <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
               <div class="card bg-light d-flex flex-fill">
                 <div class="card-header text-muted border-bottom-0">
@@ -57,8 +57,10 @@
                 </div>
                 <div class="card-footer">
                   <div class="text-right">
-                    <a href="#" class="btn btn-sm btn-primary">
-                      <i class="fas fa-user"></i> Profil
+                    <form method="POST" action="{% url 'client_delete' client.id %}">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-sm btn-danger" value="Supprimer"><i class="fas fa-trash"></i></button>
+                    </form>
                     </a>
                   </div>
                 </div>
@@ -71,14 +73,13 @@
         <div class="card-footer">
           <nav aria-label="Contacts Page Navigation">
             <ul class="pagination justify-content-center m-0">
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">5</a></li>
-              <li class="page-item"><a class="page-link" href="#">6</a></li>
-              <li class="page-item"><a class="page-link" href="#">7</a></li>
-              <li class="page-item"><a class="page-link" href="#">8</a></li>
+              {% if page.has_next %}
+                <li class="page-item active"><a class="page-link" href="{% url 'clients' %}?page={{ page.next_page_number }}">Suivant</a></li>
+              {% endif %}
+
+              {% if page.has_previous %}
+                <li class="page-item active"><a class="page-link" href="{% url 'clients' %}?page={{ page.previous_page_number }}">Précédent</a></li>
+              {% endif %}
             </ul>
           </nav>
         </div>

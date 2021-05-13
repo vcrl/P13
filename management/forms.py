@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.forms import ModelChoiceField
 from django.contrib.auth.models import User
 from .models import Client, Chien, Race, Service, RDV, Employee
+from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
 import datetime
 
 class NewClient(forms.ModelForm):
@@ -39,7 +40,19 @@ class NewRace(forms.ModelForm):
 class NewRDV(forms.ModelForm):
     client = forms.ModelChoiceField(queryset=Client.objects.all(), initial=0)
     service = forms.ModelMultipleChoiceField(queryset=Service.objects.all(), initial=0)
-    date = forms.DateField(initial=datetime.date.today)
+    date =  forms.DateTimeField(
+        widget=DateTimePicker(
+            options={
+                'useCurrent': True,
+                'collapse': False,
+            },
+            attrs={
+                'append': 'fa fa-calendar',
+                'icon_toggle': True,
+            }
+        ),
+    )
+ #forms.DateField(initial=datetime.date.today)
     comment = forms.CharField(max_length=255, widget=forms.Textarea)
     toiletteur = forms.ModelChoiceField(queryset=Employee.objects.all(), initial=0)
     

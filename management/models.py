@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 
 class Employee(models.Model):
     prenom = models.CharField(max_length=155, null=True)

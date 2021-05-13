@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'frontpage',
     'management',
     'widget_tweaks',
+    'tempus_dominus',
 ]
 
 MIDDLEWARE = [

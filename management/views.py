@@ -3,6 +3,7 @@ from .models import Client, Chien, Race, Service, RDV
 from .forms import NewClient, NewDog, NewRace, NewRDV, NewService
 from django.utils import timezone
 import datetime
+from django.core.paginator import Paginator
 
 # Clients.
 def add_client(request):
@@ -12,13 +13,23 @@ def add_client(request):
 def clients(request):
     clients = Client.objects.all().order_by('nom')
     chiens = Chien.objects.all()
-    return render(request, "management/clients.html", {'clients':clients, 'chiens':chiens})
+
+    clients_paginator = Paginator(clients, 6)
+    page_number = request.GET.get("page")
+    page = clients_paginator.get_page(page_number)
+    return render(request, "management/clients.html", {'clients':clients, 'chiens':chiens, 'page':page, 'count':clients_paginator.count})
 
 def save_client(request):
     if request.method == "POST":
         form = NewClient(request.POST)
         if form.is_valid():
             form.save()
+        return redirect("clients")
+
+def client_delete(request, client_pk):
+    if request.method == "POST":
+        client = get_object_or_404(Client, pk=client_pk)
+        client.delete()
         return redirect("clients")
 
 # Chiens.
@@ -29,7 +40,10 @@ def add_dog(request):
 def dogs(request):
     clients = Client.objects.all()
     chiens = Chien.objects.all().order_by('nom')
-    return render(request, "management/dogs.html", {'clients':clients, 'chiens':chiens})
+    chiens_paginator = Paginator(chiens, 6)
+    page_number = request.GET.get("page")
+    page = chiens_paginator.get_page(page_number)
+    return render(request, "management/dogs.html", {'clients':clients, 'chiens':chiens, 'page':page})
 
 def save_dog(request):
     if request.method == "POST":
@@ -89,7 +103,7 @@ def save_rdv(request):
         form = NewRDV(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("rdv_list")  
+    return redirect("rdv_list")  
 
 def rdv_details(request, rdv_pk):
     rdv = get_object_or_404(RDV, pk=rdv_pk)
@@ -104,7 +118,7 @@ def rdv_complete(request, rdv_pk):
     if request.method == "POST":
         rdv.completed = timezone.now()
         rdv.save()
-        return redirect('rdv_list')
+        return redirect("rdv_list")
 
 def rdv_delete(request, rdv_pk):
     if request.method == "POST":
@@ -160,3 +174,7 @@ def revenus_annuels(request):
 
     return render(request, 'management/revenus_annuels.html', {"month":current_month, "today":today, "rdv_list":rdv_list, 
     "gain_total":gain_total, "gain_tva":gain_tva, "gain_net":gain_net})
+
+
+# Employés.
+
