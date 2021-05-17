@@ -35,5 +35,5 @@ urlpatterns = [
     path('add_employee/', views.add_employee, name="add_employee"),
     path('save_employee/', views.save_employee, name="save_employee"),
     path('employees/', views.employees, name="employees"),
-    path('clients/<int:client_pk>/delete', views.client_delete, name="client_delete"),
+    path('clients/<int:client_pk>/delete', views.employee_delete, name="employee_delete"),
 ]

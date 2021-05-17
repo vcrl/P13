@@ -182,23 +182,23 @@ def add_employee(request):
     return render(request, "management/add_employee.html", {'form':form})
 
 def employees(request):
-    clients = Client.objects.all().order_by('nom')
-    chiens = Chien.objects.all()
+    employees = Employee.objects.all().order_by('nom')
+    chiens = Employee.objects.all()
 
-    clients_paginator = Paginator(clients, 6)
+    clients_paginator = Paginator(employees, 6)
     page_number = request.GET.get("page")
     page = clients_paginator.get_page(page_number)
-    return render(request, "management/clients.html", {'clients':clients, 'chiens':chiens, 'page':page, 'count':clients_paginator.count})
+    return render(request, "management/employees.html", {'employee':employees, 'chiens':chiens, 'page':page, 'count':clients_paginator.count})
 
 def save_employee(request):
     if request.method == "POST":
-        form = NewClient(request.POST)
+        form = NewEmployee(request.POST)
         if form.is_valid():
             form.save()
-        return redirect("clients")
+        return redirect("employees")
 
 def employee_delete(request, client_pk):
     if request.method == "POST":
-        client = get_object_or_404(Client, pk=client_pk)
+        client = get_object_or_404(Employee, pk=client_pk)
         client.delete()
-        return redirect("clients")
+        return redirect("employees")
