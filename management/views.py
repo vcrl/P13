@@ -197,8 +197,8 @@ def save_employee(request):
             form.save()
         return redirect("employees")
 
-def employee_delete(request, client_pk):
+def employee_delete(request, employee_pk):
     if request.method == "POST":
-        client = get_object_or_404(Employee, pk=client_pk)
+        client = get_object_or_404(Employee, pk=employee_pk)
         client.delete()
         return redirect("employees")

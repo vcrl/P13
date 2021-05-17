@@ -88,20 +88,7 @@ class NewEmployee(forms.ModelForm):
     nom = forms.CharField(max_length=254)
     adresse = forms.CharField(max_length=254)
     num = forms.CharField(max_length=254)
-    rdv_number = forms.IntegerField()
     joined = forms.DateTimeField(
-        widget=DateTimePicker(
-            options={
-                'useCurrent': True,
-                'collapse': False,
-            },
-            attrs={
-                'append': 'fa fa-calendar',
-                'icon_toggle': True,
-            }
-        ),
-    )
-    fired = forms.DateTimeField(
         widget=DateTimePicker(
             options={
                 'useCurrent': True,
