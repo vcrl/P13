@@ -8,6 +8,7 @@ urlpatterns = [
     path('save_client', views.save_client, name="save_client"),
     path('clients/', views.clients, name="clients"),
     path('clients/<int:client_pk>/delete', views.client_delete, name="client_delete"),
+    path('clients/<int:client_pk>/edit', views.client_edit, name="client_edit"),
     # Animaux.
     path('add_dog/', views.add_dog, name="add_dog"),
     path('dogs/', views.dogs, name="dogs"),

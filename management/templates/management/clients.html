@@ -56,10 +56,14 @@
                   </div>
                 </div>
                 <div class="card-footer">
-                  <div class="text-right">
+                  <div class="text-center">
                     <form method="POST" action="{% url 'client_delete' client.id %}">
                       {% csrf_token %}
-                      <button type="submit" class="btn btn-sm btn-danger" value="Supprimer"><i class="fas fa-trash"></i></button>
+                      <button type="submit" class="btn btn-xl btn-danger" value="Supprimer"><i class="fas fa-trash"></i> Supprimer</button>
+                    </form>
+                    <form method="GET" action="{% url 'client_edit' client.id %}">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-xl btn-primary" value="Editer"><i class="fas fa-edit"></i> Éditer</button>
                     </form>
                     </a>
                   </div>

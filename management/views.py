@@ -32,6 +32,15 @@ def client_delete(request, client_pk):
         client.delete()
         return redirect("clients")
 
+def client_edit(request, client_pk):
+    client = get_object_or_404(Client, pk=client_pk)
+    form = NewClient(request.POST or None, instance=client)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect("clients")
+    return render(request, "management/edit_client.html", {'client':client, 'form':form})
+
 # Chiens.
 def add_dog(request):
     form = NewDog()
