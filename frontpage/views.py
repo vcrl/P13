@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from management.models import *
+from clients.models import Client, Chien, Race
+from rdv.models import RDV
 import datetime
 
 # Create your views here.

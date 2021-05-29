@@ -40,7 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'frontpage',
-    'management',
+    'clients',
+    'rdv',
+    'services',
+    'revenus',
+    'employes',
     'widget_tweaks',
     'tempus_dominus',
 ]
