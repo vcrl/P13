@@ -58,14 +58,14 @@
                   </div>
                 </div>
                 <div class="card-footer">
-                  <div class="text-right">
+                  <div class="" style="display: flex;">
+                    <form method="GET" action="{% url 'employee_edit' employee.id %}" style="margin-right: 1%;">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-xl btn-primary" value=""><i class="fas fa-edit"></i></button>
+                    </form>
                     <form method="POST" action="{% url 'employee_delete' employee.id %}">
                       {% csrf_token %}
-                      <button type="submit" class="btn btn-sm btn-danger" value="Supprimer"><i class="fas fa-trash"></i></button>
-                    </form>
-                    <form method="GET" action="{% url 'employee_edit' employee.id %}">
-                      {% csrf_token %}
-                      <button type="submit" class="btn btn-xl btn-primary" value="Editer"><i class="fas fa-edit"></i> Éditer</button>
+                      <button type="submit" class="btn btn-sm btn-danger" value=""><i class="fas fa-trash"></i></button>
                     </form>
                     </a>
                   </div>

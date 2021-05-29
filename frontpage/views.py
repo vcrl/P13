@@ -10,7 +10,8 @@ def frontpage(request):
     races = Race.objects.all().count()
     rdv = RDV.objects.all().count()
     gain_net = calcule_monthly_income()
-    return render(request, "frontpage/index.html", {'chiens':chiens, 'clients':clients, 'races':races, "rdv":rdv, "gain_net":gain_net})
+    rdvs = RDV.objects.all()
+    return render(request, "frontpage/index.html", {'chiens':chiens, 'clients':clients, 'races':races, "rdv":rdv, "gain_net":gain_net, "rdvs":rdvs})
 
 def calcule_monthly_income():
     today = datetime.date.today()
