@@ -31,6 +31,8 @@ def employee_delete(request, employee_pk):
         client = get_object_or_404(Employee, pk=employee_pk)
         client.delete()
         return redirect("employees")
+    else:
+        return redirect("employees")
 
 def employee_edit(request, employee_pk):
     employee = get_object_or_404(Employee, pk=employee_pk)
@@ -38,5 +40,7 @@ def employee_edit(request, employee_pk):
     if request.method == "POST":
         if form.is_valid():
             form.save()
+            return redirect("employees")
+        else:
             return redirect("employees")
     return render(request, "employes/edit_employee.html", {'employee':employee, 'form':form})
