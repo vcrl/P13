@@ -1,9 +1,17 @@
+"""
+Module permettant les tests unitaires
+des urls de l'application.
+"""
 from django.test import SimpleTestCase
 from django.urls import resolve, reverse
 from ..views import add_client, clients, dogs, save_dog, add_race, save_race, save_client
 import re
 
 class Test_Urls(SimpleTestCase):
+    """
+    Classe principale permettant d'exécuter les tests
+    unitaires de l'application.
+    """
     # Dogs.
     def test_dogs(self):
         url = reverse('dogs')

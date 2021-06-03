@@ -20,8 +20,8 @@ class Service(models.Model):
 
     service = models.CharField(max_length=255, null=True, default="")
     prix = models.DecimalField(max_digits=6, decimal_places=2, default="", null=True)
-    race = models.CharField(max_length=9, choices=RACE_CHOICE, default="Moyenne")
-    duree = models.CharField(max_length=9, choices=EXEC_CHOICE, default="~ 30 min.")
+    race = models.CharField(max_length=9, choices=RACE_CHOICE, default="Moyenne", null=True)
+    duree = models.CharField(max_length=9, choices=EXEC_CHOICE, default="~ 30 min.", null=True)
 
     def __str__(self):
         return self.service

@@ -9,7 +9,7 @@ from django.utils import tree
 class RDV(models.Model):
     client = models.ForeignKey(Client, on_delete=models.SET_NULL, default="", null=True)
     service = models.ManyToManyField(Service, default="", null=True)
-    date = models.DateTimeField()
+    date = models.DateTimeField(null=True)
     completed = models.DateTimeField(null=True)
     comment = models.TextField(max_length=255, default="", null=True)
     toiletteur = models.ForeignKey(Employee, on_delete=models.SET_NULL, default="", null=True)

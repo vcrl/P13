@@ -33,9 +33,13 @@ def rdv_complete(request, rdv_pk):
         rdv.completed = timezone.now()
         rdv.save()
         return redirect("rdv_list")
+    else:
+        return redirect("rdv_list")
 
 def rdv_delete(request, rdv_pk):
     if request.method == "POST":
         rdv = get_object_or_404(RDV, pk=rdv_pk)
         rdv.delete()
+        return redirect("rdv_list")
+    else:
         return redirect("rdv_list")

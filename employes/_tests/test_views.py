@@ -1,3 +1,7 @@
+"""
+Module permettant les tests unitaires
+des vues de l'application.
+"""
 from django.test import TestCase, RequestFactory, Client, client
 from django.urls import reverse, resolve
 from django.core.paginator import Page
@@ -7,6 +11,10 @@ from ..views import employees, employee_edit, employee_delete, save_employee
 import json
 
 class Test_Views(TestCase):
+    """
+    Classe principale permettant d'exécuter les tests
+    unitaires de l'application.
+    """
     def setUp(self):
         employee = Employee.objects.create(
             nom="Dupont",

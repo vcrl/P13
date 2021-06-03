@@ -1,3 +1,7 @@
+"""
+Module permettant les tests unitaires
+des urls de l'application.
+"""
 from django.test import TestCase, Client, RequestFactory
 from django.urls import reverse, resolve
 from django.contrib.auth.models import User
@@ -5,6 +9,10 @@ from django.contrib import auth
 from ..models import Client, Race, Chien
 
 class Test_Models(TestCase):
+    """
+    Classe principale permettant d'exécuter les tests
+    unitaires de l'application.
+    """
     def test_dog_save_in_db(self):
         chien = Chien.objects.create(nom="Kiki")
         self.assertIs(chien.nom, "Kiki")

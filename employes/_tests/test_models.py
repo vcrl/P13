@@ -1,3 +1,7 @@
+"""
+Module permettant les tests unitaires
+des vues de l'application.
+"""
 from employes.views import employees
 from django.test import TestCase, Client, RequestFactory
 from django.urls import reverse, resolve
@@ -6,6 +10,10 @@ from django.contrib import auth
 from ..models import Employee
 
 class Test_Models(TestCase):
+    """
+    Classe principale permettant d'exécuter les tests
+    unitaires de l'application.
+    """
     def test_employee_save_in_db(self):
         employee = Employee.objects.create(
             nom="Dupont",

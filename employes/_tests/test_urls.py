@@ -1,9 +1,18 @@
+
+"""
+Module permettant les tests unitaires
+des vues de l'application.
+"""
 from django.test import SimpleTestCase
 from django.urls import resolve, reverse
 from ..views import add_employee, employee_delete, employee_edit, employees, save_employee
 import re
 
 class Test_Urls(SimpleTestCase):
+    """
+    Classe principale permettant d'exécuter les tests
+    unitaires de l'application.
+    """
     def test_add_employee(self):
         url = reverse('add_employee')
         self.assertEquals(resolve(url).func, add_employee)

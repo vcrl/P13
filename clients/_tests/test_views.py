@@ -1,3 +1,7 @@
+"""
+Module permettant les tests unitaires
+des urls de l'application.
+"""
 from django.test import TestCase, RequestFactory, Client, client
 from django.urls import reverse, resolve
 from django.core.paginator import Page
@@ -7,6 +11,10 @@ from ..views import clients, save_dog, add_dog, add_race, dogs
 import json
 
 class Test_Views(TestCase):
+    """
+    Classe principale permettant d'exécuter les tests
+    unitaires de l'application.
+    """
     def setUp(self):
         race = Race.objects.create(
             race="Spitz"

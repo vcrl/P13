@@ -19,6 +19,8 @@ def save_service(request):
         if form.is_valid():
             form.save()
         return redirect("services")
+    else:
+        return redirect("services")
 
 def service_details(request, service_pk):
     service = get_object_or_404(Service, pk=service_pk)
@@ -28,4 +30,6 @@ def service_delete(request, service_pk):
     if request.method == "POST":
         service = get_object_or_404(Service, pk=service_pk)
         service.delete()
+        return redirect("services")
+    else:
         return redirect("services")
