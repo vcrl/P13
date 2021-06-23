@@ -1,46 +1,30 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Employee
 from .forms import NewEmployee
 from django.utils import timezone
 import datetime
 from django.core.paginator import Paginator
+from .services import employee_delete_context, employee_edit_context, get_employees_context, manage_super_context, save_employee_context
 
 # Employés.
+@login_required
 def add_employee(request):
     form = NewEmployee()
     return render(request, "employes/add_employee.html", {'form':form})
 
+@login_required
 def employees(request):
-    employees = Employee.objects.all().order_by('nom')
-    chiens = Employee.objects.all()
+    return manage_super_context(get_employees_context(request))
 
-    clients_paginator = Paginator(employees, 6)
-    page_number = request.GET.get("page")
-    page = clients_paginator.get_page(page_number)
-    return render(request, "employes/employees.html", {'employee':employees, 'chiens':chiens, 'page':page, 'count':clients_paginator.count})
-
+@login_required
 def save_employee(request):
-    if request.method == "POST":
-        form = NewEmployee(request.POST)
-        if form.is_valid():
-            form.save()
-        return redirect("employees")
+    return manage_super_context(save_employee_context(request))
 
+@login_required
 def employee_delete(request, employee_pk):
-    if request.method == "POST":
-        client = get_object_or_404(Employee, pk=employee_pk)
-        client.delete()
-        return redirect("employees")
-    else:
-        return redirect("employees")
+    return manage_super_context(employee_delete_context(request, employee_pk))
 
+@login_required
 def employee_edit(request, employee_pk):
-    employee = get_object_or_404(Employee, pk=employee_pk)
-    form = NewEmployee(request.POST or None, instance=employee)
-    if request.method == "POST":
-        if form.is_valid():
-            form.save()
-            return redirect("employees")
-        else:
-            return redirect("employees")
-    return render(request, "employes/edit_employee.html", {'employee':employee, 'form':form})
+    return manage_super_context(employee_edit_context(request, employee_pk))

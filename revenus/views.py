@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 import datetime
 from rdv.models import RDV
 from django.core.paginator import Paginator
 
+@login_required
 def revenus_mensuel(request):
     today = datetime.date.today()
     months = ['zero','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre']
@@ -28,6 +30,7 @@ def revenus_mensuel(request):
     return render(request, 'revenus/revenus_mensuel.html', {"month":current_month, "today":today, "rdv_list":rdv_list, 
     "gain_total":gain_total, "gain_tva":gain_tva, "gain_net":gain_net})
 
+@login_required
 def revenus_annuels(request):
     today = datetime.date.today()
     months = ['zero','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre']

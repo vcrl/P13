@@ -5,6 +5,7 @@ des vues de l'application.
 from django.test import TestCase, RequestFactory, Client, client
 from django.urls import reverse, resolve
 from django.core.paginator import Page
+from django.contrib.auth.models import User
 from django.contrib import auth
 from ..models import RDV
 from ..views import add_rdv, rdv_complete, rdv_delete, rdv_details, rdv_list
@@ -20,6 +21,16 @@ class Test_Views(TestCase):
 
     def test_add_rdv(self):
         response = self.client.get(reverse(add_rdv))
+        self.assertEqual(response.status_code, 302)
+    
+    def test_add_rdv_login(self):
+        user = User.objects.create_user(
+            username = 'user',
+            password = '123'
+        )
+        user.save()
+        self.client.login(username="user", password="123")
+        response = self.client.get(reverse(add_rdv))
         self.assertEqual(response.status_code, 200)
     
     def test_rdv_delete(self):
@@ -27,6 +38,20 @@ class Test_Views(TestCase):
             comment="test",
         )
         rdv.save()
+        response = self.client.get('/rdv_list/' + str(rdv.id) + '/delete')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_rdv_delete_login(self):
+        user = User.objects.create_user(
+            username = 'user',
+            password = '123'
+        )
+        user.save()
+        rdv = RDV.objects.create(
+            comment="test",
+        )
+        rdv.save()
+        self.client.login(username="user", password="123")
         response = self.client.get('/rdv_list/' + str(rdv.id) + '/delete')
         self.assertEqual(response.status_code, 302)
 
@@ -37,7 +62,35 @@ class Test_Views(TestCase):
         rdv.save()
         response = self.client.get('/complete_rdv/' + str(rdv.id))
         self.assertEqual(response.status_code, 302)
+    
+    def test_rdv_complete_login(self):
+        user = User.objects.create_user(
+            username = 'user',
+            password = '123'
+        )
+        user.save()
+        rdv = RDV.objects.create(
+            comment="test",
+        )
+        rdv.save()
+        self.client.login(username="user", password="123")
+        response = self.client.get('/complete_rdv/' + str(rdv.id))
+        self.assertEqual(response.status_code, 302)
 
     def test_rdv_list(self):
+        response = self.client.get(reverse(rdv_list))
+        self.assertEqual(response.status_code, 302)
+    
+    def test_rdv_list_login(self):
+        user = User.objects.create_user(
+            username = 'user',
+            password = '123'
+        )
+        user.save()
+        rdv = RDV.objects.create(
+            comment="test",
+        )
+        rdv.save()
+        self.client.login(username="user", password="123")
         response = self.client.get(reverse(rdv_list))
         self.assertEqual(response.status_code, 200)

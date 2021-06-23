@@ -3,7 +3,6 @@ from . import views
 from django.urls import path, include
 
 urlpatterns = [
-    path('calendar/', views.calendar, name="calendar"),
     path('add_rdv/', views.add_rdv, name="add_rdv"),
     path('save_rdv/', views.save_rdv, name="save_rdv"),
     path('rdv/<int:rdv_pk>', views.rdv_details, name="rdv_details"),

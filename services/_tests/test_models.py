@@ -22,4 +22,4 @@ class Test_Models(TestCase):
         service = Service.objects.create(
             prix = 10.00,
             )
-        self.assertIs(rdv.prix, 10.00)
+        self.assertIs(service.prix, 10.00)
