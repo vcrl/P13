@@ -34,8 +34,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{% url 'frontpage' %}" class="brand-link">
-      <img src="{% static 'dist/img/AdminLTELogo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Toilettage</span>
+      <span class="brand-text font-weight-light"><b>Super</b> Toutous</span>
     </a>
 
     <!-- Sidebar -->
@@ -212,6 +211,12 @@
      {% block content %}
 
      {% endblock %}
+     <footer class="main-footer">
+      <div class="float-right d-none d-sm-block">
+        <b>Version</b> 1.0
+      </div>
+      <strong>Copyright &copy; Super Toutous {% if user.is_authenticated %}| <a href="/admin" target="_blank">Accéder au panel administratif</a> | <form action="{% url 'signout' %}" method="POST">{% csrf_token %}<button type="submit" class="btn btn-primary btn-block">Déconnexion</button></strong></form>{% endif %}
+    </footer>
      <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
      <!-- jQuery UI 1.11.4 -->
      <script src="{% static 'plugins/jquery-ui/jquery-ui.min.js' %}"></script>
