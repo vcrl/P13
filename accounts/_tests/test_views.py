@@ -1,3 +1,4 @@
+from accounts.views import displayprofile
 from django.test import TestCase, Client
 from django.urls import reverse, resolve
 from django.contrib.auth.models import User
@@ -38,3 +39,11 @@ class Test_Views(TestCase):
         User.objects.create_user(**self.credentials)
         response = self.client.post(reverse('loginuser'), self.credentials, follow=True)
         self.assertTrue(response.context['user'].is_active)
+    
+    def test_return_to_frontpage(self):
+        response = self.client.get(reverse('frontpage'))
+        self.assertEquals(response.status_code, 200)
+
+    def test_return_to_frontpage(self):
+        response = self.client.get(reverse(displayprofile))
+        self.assertEquals(response.status_code, 200)

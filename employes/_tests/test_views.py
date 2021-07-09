@@ -9,7 +9,7 @@ from django.urls import reverse, resolve
 from django.core.paginator import Page
 from django.contrib import auth
 from ..models import Employee
-from ..views import employees, employee_edit, employee_delete, save_employee
+from ..views import add_employee, employees, employee_edit, employee_delete, save_employee
 import json
 
 class Test_Views(TestCase):
@@ -95,4 +95,18 @@ class Test_Views(TestCase):
         user.save()
         self.client.login(username="user", password="123")
         response = self.client.get('/employees/' + str(employee.id) + '/edit')
+        self.assertEqual(response.status_code, 200)
+
+    def test_add_employee(self):
+        response = self.client.get(reverse(add_employee))
+        self.assertEqual(response.status_code, 302)
+    
+    def test_add_employee_login(self):
+        user = User.objects.create_user(
+            username = 'user',
+            password = '123'
+        )
+        user.save()
+        self.client.login(username="user", password="123")
+        response = self.client.get(reverse(add_employee))
         self.assertEqual(response.status_code, 200)

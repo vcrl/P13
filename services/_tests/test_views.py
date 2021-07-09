@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Page
 from django.contrib import auth
 from ..models import Service
-from ..views import service_delete, service_details, services, save_service
+from ..views import add_service, service_delete, service_details, services, save_service
 import json
 
 class Test_Views(TestCase):
@@ -80,4 +80,26 @@ class Test_Views(TestCase):
         user.save()
         self.client.login(username="user", password="123")
         response = self.client.get(reverse(save_service))
+        self.assertEqual(response.status_code, 302)
+    
+    def test_add_service(self):
+        response = self.client.get(reverse(add_service))
+        self.assertEqual(response.status_code, 302)
+    
+    def test_add_service_login(self):
+        user = User.objects.create_user(
+            username = 'user',
+            password = '123'
+        )
+        user.save()
+        self.client.login(username="user", password="123")
+        response = self.client.get(reverse(add_service))
+        self.assertEqual(response.status_code, 200)
+    
+    def test_services_details(self):
+        service = Service.objects.create(
+            prix=10.00,
+        )
+        service.save()
+        response = self.client.get('/services/' + str(service.id))
         self.assertEqual(response.status_code, 302)
