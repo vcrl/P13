@@ -78,6 +78,8 @@ class Test_Views(TestCase):
 		response = self.client.get(reverse(save_dog))
 		self.assertEqual(response.status_code, 200)
 		self.save_dog_template(response)
+		response = self.client.post(reverse(save_dog))
+		self.assertEqual(response.status_code, 200)
 	
 	def save_dog_template(self, response):
 		self.assertTemplateUsed(response, 'frontpage/base.html')

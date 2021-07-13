@@ -63,6 +63,8 @@ class Test_Views(TestCase):
         self.client.login(username="user", password="123")
         response = self.client.get('/rdv_list/' + str(rdv.id) + '/delete')
         self.assertEqual(response.status_code, 302)
+        response = self.client.post('/rdv_list/' + str(rdv.id) + '/delete')
+        self.assertEqual(response.status_code, 302)
 
     def test_rdv_complete(self):
         rdv = RDV.objects.create(
@@ -84,6 +86,8 @@ class Test_Views(TestCase):
         rdv.save()
         self.client.login(username="user", password="123")
         response = self.client.get('/complete_rdv/' + str(rdv.id))
+        self.assertEqual(response.status_code, 302)
+        response = self.client.post('/complete_rdv/' + str(rdv.id))
         self.assertEqual(response.status_code, 302)
 
     def test_rdv_list(self):
@@ -120,6 +124,8 @@ class Test_Views(TestCase):
         rdv.save()
         self.client.login(username="user", password="123")
         response = self.client.get(reverse(save_rdv))
+        self.assertEqual(response.status_code, 302)
+        response = self.client.post(reverse(save_rdv))
         self.assertEqual(response.status_code, 302)
     
     def rdv_details(self):
