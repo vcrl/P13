@@ -121,6 +121,7 @@ class Test_Views(TestCase):
 	
 	def add_race_template(self, response):
 		self.assertTemplateUsed(response, 'frontpage/base.html')
+		self.assertTemplateUsed(response, "clients/add_race.html")
 
 	def dogs(self):
 		response = self.client.get(reverse(dogs))
@@ -181,6 +182,8 @@ class Test_Views(TestCase):
 		customer.save()
 		response = self.client.get('/clients/' + str(customer.id) + '/delete')
 		self.assertEqual(response.status_code, 302)
+		response = self.client.post('/clients/' + str(customer.id) + '/delete')
+		self.assertEqual(response.status_code, 302)
 
 	def test_client_edit(self):
 		customer = cust.objects.create(
@@ -191,6 +194,8 @@ class Test_Views(TestCase):
 		)
 		customer.save()
 		response = self.client.get('/clients/' + str(customer.id) + '/edit')
+		self.assertEqual(response.status_code, 302)
+		response = self.client.post('/clients/' + str(customer.id) + '/edit')
 		self.assertEqual(response.status_code, 302)
 
 	def test_client_edit_login(self):

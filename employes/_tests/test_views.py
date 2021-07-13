@@ -110,3 +110,7 @@ class Test_Views(TestCase):
         self.client.login(username="user", password="123")
         response = self.client.get(reverse(add_employee))
         self.assertEqual(response.status_code, 200)
+
+    def test_save_employee(self):
+        response = self.client.post(reverse(save_employee))
+        self.assertEqual(response.status_code, 302)

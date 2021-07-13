@@ -2,10 +2,11 @@
 Module permettant les tests unitaires
 des vues de l'application.
 """
+from services.forms import NewService
 from django.test import TestCase, RequestFactory, Client, client
 from django.urls import reverse, resolve
 from django.contrib.auth.models import User
-
+from django.shortcuts import get_object_or_404
 from django.core.paginator import Page
 from django.contrib import auth
 from ..models import Service
@@ -64,6 +65,8 @@ class Test_Views(TestCase):
         service.save()
         response = self.client.get('/services/' + str(service.id) + '/delete')
         self.assertEqual(response.status_code, 302)
+        response = self.client.post('/services/' + str(service.id) + '/delete')
+        self.assertEqual(response.status_code, 302)
 
     def test_save_service(self):
         """
@@ -81,7 +84,9 @@ class Test_Views(TestCase):
         self.client.login(username="user", password="123")
         response = self.client.get(reverse(save_service))
         self.assertEqual(response.status_code, 302)
-    
+        response = self.client.post(reverse(save_service))
+        self.assertEqual(response.status_code, 302)
+
     def test_add_service(self):
         response = self.client.get(reverse(add_service))
         self.assertEqual(response.status_code, 302)
@@ -103,3 +108,5 @@ class Test_Views(TestCase):
         service.save()
         response = self.client.get('/services/' + str(service.id))
         self.assertEqual(response.status_code, 302)
+        self.assertTemplateNotUsed(response, "services/service_detail.html")
+        

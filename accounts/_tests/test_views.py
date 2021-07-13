@@ -39,11 +39,28 @@ class Test_Views(TestCase):
         User.objects.create_user(**self.credentials)
         response = self.client.post(reverse('loginuser'), self.credentials, follow=True)
         self.assertTrue(response.context['user'].is_active)
+
+    def test_loginuser_post_nouser(self):
+        self.credentials = {
+            'username': 'skslslslsqkl',
+            'password': '000'
+            }
+        response = self.client.post(reverse('loginuser'), self.credentials, follow=True)
+        self.assertTemplateUsed(response, 'accounts/signin.html')
+
+    def test_signoutuser(self):
+        self.credentials = {
+            'username': 'user',
+            'password': '123'
+            }
+        User.objects.create_user(**self.credentials)
+        response = self.client.post(reverse('loginuser'), self.credentials, follow=True)
+        response = self.client.post(reverse('signout'), self.credentials, follow=True)
+        self.assertEquals(response.status_code, 200)
     
     def test_return_to_frontpage(self):
         response = self.client.get(reverse('frontpage'))
         self.assertEquals(response.status_code, 200)
-
-    def test_return_to_frontpage(self):
-        response = self.client.get(reverse(displayprofile))
-        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'frontpage/index.html')
+        self.assertTemplateUsed(response, 'frontpage/base.html')
+        
