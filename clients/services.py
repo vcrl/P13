@@ -50,9 +50,12 @@ def get_clients_context(request):
 def save_client_context(request):
 	super_context = init_super_context(request)
 	if request.method == "POST":
-		form = get_new_client_form(request)
+		form = NewClient(request.POST)#get_new_client_form(request)
 		if form.is_valid():
 			form.save()
+		else:
+			for i in range(100):
+				print("non")
 		super_context["redirect"] = "clients"
 		return super_context
 

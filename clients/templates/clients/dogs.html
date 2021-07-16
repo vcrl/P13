@@ -41,7 +41,7 @@
                       
                       
                       <ul class="ml-4 mb-0 fa-ul text-muted">
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-clock"></i></span> Age: {{ chien.age }}</li>
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-clock"></i></span> Age: {{ chien.age }} an(s)</li>
                         {% for client in clients %}
                           {% if client.chien.nom == chien.nom %}
                           <li class="small"><span class="fa-li"><i class="fas fa-lg fa-user"></i></span> Propriétaire : {{ client.prenom }} {{ client.nom }} (<i class="fas fa-lg fa-phone"></i> {{ client.num }})</li>
@@ -50,7 +50,7 @@
                       </ul>
                     </div>
                     <div class="col-5 text-center">
-                      <p class="text-muted text-sm"><b>A propos: </b> {{ chien.comment }} </p>
+                      <p class="text-muted text-sm"><b></b> {{ chien.comment }} </p>
                     </div>
                   </div>
                 </div>
